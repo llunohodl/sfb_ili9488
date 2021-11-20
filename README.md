@@ -1,4 +1,4 @@
-# Utils for use standart framebuffer driver with ili9488
+# Utils for use standard frame buffer driver with ili9488
 
 > All tested on framebuffer driver from [4.14.111 kernel for NanoPi NEO Core](https://github.com/friendlyarm/linux/tree/sunxi-4.14.y)
 
