@@ -164,7 +164,7 @@ int main(int argc, char *argv[]) {
 		uint16_t yst = ((q==2 || q==3) ? 160 : 0) + (30*(st&0x03));	    	\
 		uint16_t xend =((q==0 || q==3) ? 480 : 240) - (30*(st&0x03));		\
 		uint16_t yend =((q==2 || q==3) ? 320 : 160) - (30*(st&0x03));		\
-	    DRAW_RECT(xst,yst,xend,yend,r,g,b);						\
+		DRAW_RECT(xst,yst,xend,yend,r,g,b);					\
 	}while(0);
 
 
