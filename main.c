@@ -182,9 +182,9 @@ int main(int argc, char *argv[]) {
 				}
 			}
 		xbarbeg=(xbarbeg+10)%xres;
-			xbarend=(xbarend+10)%xres;
-			ybarbeg=(ybarbeg+10)%yres;
-			ybarend=(ybarend+10)%yres;
+		xbarend=(xbarend+10)%xres;
+		ybarbeg=(ybarbeg+10)%yres;
+		ybarend=(ybarend+10)%yres;
 		}else{
 			switch (disp&0x03){
 				case 0:
