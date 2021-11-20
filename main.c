@@ -46,16 +46,16 @@ void print_help(){
 
 int main(int argc, char *argv[]) {
 
-    void*   m_FrameBuffer;
-    struct  fb_fix_screeninfo m_FixInfo;
-    struct  fb_var_screeninfo m_VarInfo;
-    int m_FBFD;
+	void*   m_FrameBuffer;
+	struct  fb_fix_screeninfo m_FixInfo;
+	struct  fb_var_screeninfo m_VarInfo;
+	int m_FBFD;
 
-    char test_type ='r';
-    char fb_name[40] ="/dev/fb1";
+	char test_type ='r';
+	char fb_name[40] ="/dev/fb1";
 
-    if(argc>=2){
-        for(int i=1;i<argc;i++){
+	if(argc>=2){
+		for(int i=1;i<argc;i++){
 			if(argv[i][0]!='-'){
 				printf("Wrong argument format: %s\r\n\n",(char*)argv[i]);
 				print_help();
@@ -85,42 +85,42 @@ int main(int argc, char *argv[]) {
 					return 1;
 			}
 		}	
-    }
+	}
 
 
-    int iFrameBufferSize;
-    /* Open the framebuffer device in read write */
-    m_FBFD = open(fb_name, O_RDWR);
-    if (m_FBFD < 0) {
-    	printf("Unable to open %s.\n", fb_name);
-    	return 1;
-    }
-    /* Do Ioctl. Retrieve fixed screen info. */
-    if (ioctl(m_FBFD, FBIOGET_FSCREENINFO, &m_FixInfo) < 0) {
-    	printf("get fixed screen info failed: %s\n",
-    		  strerror(errno));
-    	close(m_FBFD);
-    	return 1;
-    }
-    /* Do Ioctl. Get the variable screen info. */
-    if (ioctl(m_FBFD, FBIOGET_VSCREENINFO, &m_VarInfo) < 0) {
-    	printf("Unable to retrieve variable screen info: %s\n",
-    		  strerror(errno));
-    	close(m_FBFD);
-    	return 1;
-    }
+	int iFrameBufferSize;
+	/* Open the framebuffer device in read write */
+	m_FBFD = open(fb_name, O_RDWR);
+	if (m_FBFD < 0) {
+		printf("Unable to open %s.\n", fb_name);
+		return 1;
+	}
+	/* Do Ioctl. Retrieve fixed screen info. */
+	if (ioctl(m_FBFD, FBIOGET_FSCREENINFO, &m_FixInfo) < 0) {
+		printf("get fixed screen info failed: %s\n",
+			  strerror(errno));
+		close(m_FBFD);
+		return 1;
+	}
+	/* Do Ioctl. Get the variable screen info. */
+	if (ioctl(m_FBFD, FBIOGET_VSCREENINFO, &m_VarInfo) < 0) {
+		printf("Unable to retrieve variable screen info: %s\n",
+			  strerror(errno));
+		close(m_FBFD);
+		return 1;
+	}
 
-    /* Calculate the size to mmap */
-    iFrameBufferSize = m_FixInfo.line_length * m_VarInfo.yres;
-    printf("Line length %d\n", m_FixInfo.line_length);
-    /* Now mmap the framebuffer. */
-    m_FrameBuffer = mmap(NULL, iFrameBufferSize, PROT_READ | PROT_WRITE,
-    				 MAP_SHARED, m_FBFD,0);
-    if (m_FrameBuffer == NULL) {
-    	printf("mmap failed:\n");
-    	close(m_FBFD);
-    	return 1;
-    }
+	/* Calculate the size to mmap */
+	iFrameBufferSize = m_FixInfo.line_length * m_VarInfo.yres;
+	printf("Line length %d\n", m_FixInfo.line_length);
+	/* Now mmap the framebuffer. */
+	m_FrameBuffer = mmap(NULL, iFrameBufferSize, PROT_READ | PROT_WRITE,
+		 MAP_SHARED, m_FBFD,0);
+	if (m_FrameBuffer == NULL) {
+		printf("mmap failed:\n");
+		close(m_FBFD);
+		return 1;
+	}
 
 	switch(test_type){
 		case 'r':
@@ -139,7 +139,7 @@ int main(int argc, char *argv[]) {
 	}
 	
 	uint32_t xres=480;
-    uint32_t yres=320;
+	uint32_t yres=320;
 	uint8_t bytepp=3; 
 	int x,y;
 
@@ -169,8 +169,7 @@ int main(int argc, char *argv[]) {
 
 
 	time_t start = time(NULL);
-
-    uint8_t disp=0;
+	uint8_t disp=0;
 	while(1) { 
 		if(test_type=='b'){
 			for (y=0; y<yres; y++) {
@@ -188,7 +187,7 @@ int main(int argc, char *argv[]) {
 		}else{
 			switch (disp&0x03){
 				case 0:
-				    	DRAW_TEST_STEP(0,0,0xFF,0x00,0x00);
+					DRAW_TEST_STEP(0,0,0xFF,0x00,0x00);
 					DRAW_TEST_STEP(1,3,0x00,0xFF,0x00);
 					DRAW_TEST_STEP(2,1,0x00,0xFF,0x00);
 					DRAW_TEST_STEP(3,2,0xFF,0x00,0x00);
@@ -225,6 +224,6 @@ int main(int argc, char *argv[]) {
 			fflush(stdout);
 		}
 		usleep(100000);//100ms
-    }
+	}
 
 }
