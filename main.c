@@ -46,13 +46,13 @@ void print_help(){
 
 int main(int argc, char *argv[]) {
 
-	void*   m_FrameBuffer;
-	struct  fb_fix_screeninfo m_FixInfo;
-	struct  fb_var_screeninfo m_VarInfo;
-	int 	m_FBFD;
+    void*   m_FrameBuffer;
+    struct  fb_fix_screeninfo m_FixInfo;
+    struct  fb_var_screeninfo m_VarInfo;
+    int m_FBFD;
 
     char test_type ='r';
-	char fb_name[40] ="/dev/fb1";
+    char fb_name[40] ="/dev/fb1";
 
     if(argc>=2){
         for(int i=1;i<argc;i++){
@@ -148,8 +148,8 @@ int main(int argc, char *argv[]) {
 	uint16_t ybarbeg=0;
 	uint16_t ybarend=10;
 
-	#define DRAW_RECT(bx,by,ex,ey,r,g,b)           		\
-	for (y=by; y<ey; y++) {	                       		\
+	#define DRAW_RECT(bx,by,ex,ey,r,g,b)           			\
+	for (y=by; y<ey; y++) {	                       			\
 		for (x=bx; x<ex; x++) {                    		\
 				uint32_t offset = (x + y*xres)*bytepp;	\
 				p[offset++] = r;                      	\
@@ -158,13 +158,13 @@ int main(int argc, char *argv[]) {
 		}                                          		\
 	}
 
-	#define DRAW_TEST_STEP(q,st,r,g,b)									\
-	do{												    				\
-		uint16_t xst = ((q==0 || q==3) ? 240 : 0) + (30*(st&0x03));	    \
-		uint16_t yst = ((q==2 || q==3) ? 160 : 0) + (30*(st&0x03));	    \
-		uint16_t xend =((q==0 || q==3) ? 480 : 240) - (30*(st&0x03));	\
-		uint16_t yend =((q==2 || q==3) ? 320 : 160) - (30*(st&0x03));	\
-	    DRAW_RECT(xst,yst,xend,yend,r,g,b);								\
+	#define DRAW_TEST_STEP(q,st,r,g,b)						\
+	do{										\
+		uint16_t xst = ((q==0 || q==3) ? 240 : 0) + (30*(st&0x03));	    	\
+		uint16_t yst = ((q==2 || q==3) ? 160 : 0) + (30*(st&0x03));	    	\
+		uint16_t xend =((q==0 || q==3) ? 480 : 240) - (30*(st&0x03));		\
+		uint16_t yend =((q==2 || q==3) ? 320 : 160) - (30*(st&0x03));		\
+	    DRAW_RECT(xst,yst,xend,yend,r,g,b);						\
 	}while(0);
 
 
@@ -188,7 +188,7 @@ int main(int argc, char *argv[]) {
 		}else{
 			switch (disp&0x03){
 				case 0:
-				    DRAW_TEST_STEP(0,0,0xFF,0x00,0x00);
+				    	DRAW_TEST_STEP(0,0,0xFF,0x00,0x00);
 					DRAW_TEST_STEP(1,3,0x00,0xFF,0x00);
 					DRAW_TEST_STEP(2,1,0x00,0xFF,0x00);
 					DRAW_TEST_STEP(3,2,0xFF,0x00,0x00);
